@@ -3,7 +3,7 @@
 
 {% from "nut/map.jinja" import nut with context %}
 {% set ups_config = nut.server.ups if nut.server.ups is defined else {} %}
-{% set upsd_config = nut.server.upsd.config if nut.server.upsd.config is defined else {} %}
+{% set upsd_param = nut.server.upsd.param if nut.server.upsd.param is defined else {} %}
 {% set upsd_users = nut.server.users.users if nut.server.users.users is defined else {} %}
 
 include:
@@ -37,7 +37,7 @@ upsd_conf:
     - name: {{ nut.config_dir }}/{{ nut.server.upsd.config }}
     - source: salt://nut/templates/upsd-conf.jinja
     - context:
-        upsd: {{ upsd_config }}
+        upsd: {{ upsd_param }}
     - template: jinja
     - mode: 640
     - user: root
